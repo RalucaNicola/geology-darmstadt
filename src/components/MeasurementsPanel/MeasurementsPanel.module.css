@@ -1,0 +1,11 @@
+.label {
+  cursor: pointer;
+}
+
+.variableInfo {
+  padding: 0;
+}
+
+.centerRadioButtons {
+  justify-content: center;
+}

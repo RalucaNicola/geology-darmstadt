@@ -1,0 +1,54 @@
+.appLayout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.appTitle {
+  margin-left: 20%;
+  margin-right: 20%;
+  flex: 0 0 auto;
+}
+
+.appFooter {
+  flex: 0 0 auto;
+  font-size: var(--calcite-font-size--2);
+  padding: 10px;
+  background-color: rgba(0 0 0 / 0.3);
+  pointer-events: all;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.appContent {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  overflow-y: auto;
+}
+
+.leftPane,
+.rightPane {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media (max-width: 700px) {
+  .rightPane,
+  .leftPane > :last-child {
+    display: none;
+  }
+  .leftPane {
+    justify-content: end;
+  }
+}
