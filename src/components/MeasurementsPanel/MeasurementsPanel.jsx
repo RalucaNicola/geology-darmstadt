@@ -8,13 +8,7 @@ import {CalciteLabel, CalciteRadioButtonGroup, CalciteRadioButton, CalciteSwitch
 import {variables} from "../../config";
 import {useEffect, useRef} from "react";
 
-const MeasurementsPanel = ({
-  selectedVariable,
-  setSelectedVariable,
-  setLegendContainer,
-  displayError,
-  setDisplayError,
-}) => {
+const MeasurementsPanel = ({selectedVariable, setSelectedVariable, setLegendContainer}) => {
   const legendContainerRef = useRef();
   useEffect(() => {
     setLegendContainer(legendContainerRef.current);
