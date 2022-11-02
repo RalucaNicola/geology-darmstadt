@@ -27,7 +27,7 @@ const VoxelLayer = ({
     if (loaded && exaggeration) {
       layer.volumeStyles.getItemAt(0).verticalExaggeration = exaggeration;
     }
-  }, [loaded, exaggeration]);
+  }, [loaded, layer, exaggeration]);
 
   useEffect(() => {
     if (layer) {
@@ -63,7 +63,7 @@ const VoxelLayer = ({
         setIsosurfaceValue(Math.floor((min + max) / 2));
       }
     }
-  }, [loaded, selectedVariable]);
+  }, [loaded, layer, selectedVariable]);
 
   useEffect(() => {
     if (loaded && layer && selectedVisualization === "surfaces" && continuousVariable && isosurfaceValue) {
@@ -98,27 +98,27 @@ const VoxelLayer = ({
     if (layer) {
       layer.enableSlices = displaySlices;
     }
-  }, [layer, displaySlices]);
+  }, [layer, layer, displaySlices]);
 
   useEffect(() => {
     if (loaded) {
       layer.getVolumeStyle().slices = slices;
     }
-  }, [loaded, slices]);
+  }, [loaded, layer, slices]);
 
   useEffect(() => {
     if (loaded) {
       layer.getVolumeStyle().dynamicSections = sections;
     }
-  }, [loaded, sections]);
+  }, [loaded, layer, sections]);
 
   useEffect(() => {
     if (loaded && dimensions && dimensions.length > 0) {
       const sections = [];
-      for (let i = 1; i < dimensions[0]; i++) {
+      for (let i = 1; i < dimensions[1]; i++) {
         sections.push({enabled: false, label: `we${i}`, orientation: 180, tilt: 90, point: [0, i, 0]});
       }
-      for (let i = 1; i < dimensions[1]; i++) {
+      for (let i = 1; i < dimensions[0]; i++) {
         sections.push({enabled: false, label: `ns${i}`, orientation: 90, tilt: 90, point: [i, 0, 0]});
       }
       setSections(sections);

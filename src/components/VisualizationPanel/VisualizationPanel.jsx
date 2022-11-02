@@ -54,8 +54,8 @@ const VisualizationPanel = ({
   setSlices,
   dimensions,
 }) => {
-  const [currentNSSection, setCurrentNSSection] = useState(1);
-  const [currentWESection, setCurrentWESection] = useState(1);
+  const [currentNSSection, setCurrentNSSection] = useState(null);
+  const [currentWESection, setCurrentWESection] = useState(null);
   const [currentWESlice, setCurrentWESlice] = useState(null);
   const [currentNSSlice, setCurrentNSSlice] = useState(null);
   const [currentUpDownSlice, setCurrentUpDownSlice] = useState(null);
@@ -80,7 +80,7 @@ const VisualizationPanel = ({
       setCurrentNSSlice(getSlice("NS", 1));
       setCurrentUpDownSlice(getSlice("UD", dimensions[2]));
       setCurrentNSSection(Math.floor(dimensions[0] / 2));
-      setCurrentWESection(Math.floor(dimensions[0] / 2));
+      setCurrentWESection(Math.floor(dimensions[1] / 2));
     }
   }, [dimensions]);
 
