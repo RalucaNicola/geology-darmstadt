@@ -39,10 +39,10 @@ const VisualizationPanel = ({
   setSelectedVisualization,
   exaggeration,
   setExaggeration,
-  isosurfaceInfo,
-  displayError,
   sections,
   setSections,
+  continuousVariable,
+  isosurfaceInfo,
   isosurfaceValue,
   setIsosurfaceValue,
   displayIsosurface,
@@ -117,7 +117,7 @@ const VisualizationPanel = ({
           Surfaces and sections
         </CalciteLabel>
       </CalciteRadioButtonGroup>
-      {!displayError && selectedVisualization === "surfaces" && isosurfaceInfo ? (
+      {selectedVisualization === "surfaces" && continuousVariable && isosurfaceInfo ? (
         <div className={styles.surfaces}>
           <CalciteLabel
             className={styles.label}

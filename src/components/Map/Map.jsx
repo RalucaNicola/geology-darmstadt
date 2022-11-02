@@ -2,7 +2,6 @@ import * as styles from "./Map.module.css";
 import {useRef, useEffect, useState, Children, cloneElement} from "react";
 import SceneView from "@arcgis/core/views/SceneView";
 import WebScene from "@arcgis/core/WebScene";
-import TimeExtent from "@arcgis/core/TimeExtent";
 import {mapConfig} from "../../config";
 
 const getSidePadding = () => {

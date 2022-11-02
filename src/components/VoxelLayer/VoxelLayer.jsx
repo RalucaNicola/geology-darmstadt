@@ -6,6 +6,8 @@ const VoxelLayer = ({
   selectedVisualization,
   exaggeration,
   mapView,
+  continuousVariable,
+  setContinuousVariable,
   setIsosurfaceInfo,
   sections,
   setSections,
@@ -39,44 +41,52 @@ const VoxelLayer = ({
     }
   }, [layer, selectedVariable]);
 
-  // useEffect(() => {
-  //   if (loaded) {
-  //     const style = layer.getVariableStyle(selectedVariable.id);
-  //     if (style && style.transferFunction) {
-  //       const range = style.transferFunction.stretchRange;
-  //       const min = Math.min(Math.round(range[0]), Math.round(range[1]));
-  //       const max = Math.max(Math.round(range[0]), Math.round(range[1]));
-  //       setIsosurfaceInfo({
-  //         min,
-  //         max,
-  //       });
-  //       setIsosurfaceValue(Math.floor((min + max) / 2));
-  //     }
-  //   }
-  // }, [loaded, selectedVariable]);
+  useEffect(() => {
+    if (layer) {
+      const variable = layer.getVariable(selectedVariable.id);
+      const continuousVariable = variable.renderingFormat.continuity === "discrete" ? false : true;
+      setContinuousVariable(continuousVariable);
+    }
+  }, [layer, selectedVariable]);
 
-  // useEffect(() => {
-  //   if (loaded && layer && selectedVisualization === "surfaces" && isosurfaceValue) {
-  //     const style = layer.getVariableStyle(selectedVariable.id);
-  //     const color = layer.getColorForContinuousDataValue(selectedVariable.id, isosurfaceValue, false);
-  //     if (style) {
-  //       style.isosurfaces = [
-  //         {
-  //           value: isosurfaceValue,
-  //           enabled: true,
-  //           color: {...color, a: 0.7},
-  //           colorLocked: false,
-  //         },
-  //       ];
-  //     }
-  //   }
-  // }, [loaded, selectedVariable, isosurfaceValue, layer, selectedVisualization]);
+  useEffect(() => {
+    if (loaded) {
+      const style = layer.getVariableStyle(selectedVariable.id);
+      if (style && style.transferFunction) {
+        const range = style.transferFunction.stretchRange;
+        const min = Math.min(Math.round(range[0]), Math.round(range[1]));
+        const max = Math.max(Math.round(range[0]), Math.round(range[1]));
+        setIsosurfaceInfo({
+          min,
+          max,
+        });
+        setIsosurfaceValue(Math.floor((min + max) / 2));
+      }
+    }
+  }, [loaded, selectedVariable]);
 
-  // useEffect(() => {
-  //   if (layer) {
-  //     layer.enableIsosurfaces = displayIsosurface;
-  //   }
-  // }, [layer, displayIsosurface]);
+  useEffect(() => {
+    if (loaded && layer && selectedVisualization === "surfaces" && continuousVariable && isosurfaceValue) {
+      const style = layer.getVariableStyle(selectedVariable.id);
+      const color = layer.getColorForContinuousDataValue(selectedVariable.id, isosurfaceValue, false);
+      if (style) {
+        style.isosurfaces = [
+          {
+            value: isosurfaceValue,
+            enabled: true,
+            color: {...color, a: 0.7},
+            colorLocked: false,
+          },
+        ];
+      }
+    }
+  }, [loaded, selectedVariable, isosurfaceValue, layer, selectedVisualization, continuousVariable]);
+
+  useEffect(() => {
+    if (layer) {
+      layer.enableIsosurfaces = displayIsosurface;
+    }
+  }, [layer, displayIsosurface]);
 
   useEffect(() => {
     if (layer) {
@@ -92,13 +102,13 @@ const VoxelLayer = ({
 
   useEffect(() => {
     if (loaded) {
-      layer.volumeStyles.getItemAt(0).slices = slices;
+      layer.getVolumeStyle().slices = slices;
     }
   }, [loaded, slices]);
 
   useEffect(() => {
     if (loaded) {
-      layer.volumeStyles.getItemAt(0).dynamicSections = sections;
+      layer.getVolumeStyle().dynamicSections = sections;
     }
   }, [loaded, sections]);
 
