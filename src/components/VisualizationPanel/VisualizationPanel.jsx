@@ -218,8 +218,8 @@ const VisualizationPanel = ({
           <div className={styles.slices}>
             <img className={styles.sliceGraphic} src="./assets/slice-west-east.png"></img>
             <CalciteSlider
-              min={2}
-              max={dimensions[1]}
+              min={1}
+              max={dimensions[0]}
               scale="m"
               value={currentWESlice.point[0]}
               snap
@@ -232,7 +232,7 @@ const VisualizationPanel = ({
             <img className={styles.sliceGraphic} src="./assets/slice-north-south.png"></img>
             <CalciteSlider
               min={1}
-              max={dimensions[0] - 2}
+              max={dimensions[1] - 2}
               scale="m"
               value={currentNSSlice.point[1]}
               snap
@@ -244,7 +244,7 @@ const VisualizationPanel = ({
             ></CalciteSlider>
             <img className={styles.sliceGraphic} src="./assets/slice-up-down.png"></img>
             <CalciteSlider
-              min={1}
+              min={0}
               max={dimensions[2]}
               scale="m"
               value={currentUpDownSlice.point[2]}
@@ -265,11 +265,11 @@ const VisualizationPanel = ({
       <CalciteSlider
         labelHandles
         min="1"
-        max="30"
+        max="20"
         scale="m"
         value={exaggeration}
         snap
-        step="5"
+        step="1"
         onCalciteSliderInput={event => {
           const value = event.target.value ? event.target.value : 1;
           setExaggeration(value);
