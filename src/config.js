@@ -11,5 +11,6 @@ export const variables = [
   {
     name: "Permeability",
     id: 1,
+    unit: "md",
   },
 ];

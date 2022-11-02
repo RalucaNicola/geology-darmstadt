@@ -27,7 +27,6 @@ const MeasurementsPanel = ({
         scale="s"
         onCalciteRadioButtonChange={event => {
           const variable = variables.filter(v => v.name === event.target.value)[0];
-          console.log(variable);
           setSelectedVariable(variable);
         }}
       >
