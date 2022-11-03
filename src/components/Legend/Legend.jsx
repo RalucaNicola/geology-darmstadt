@@ -1,22 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Legend from '@arcgis/core/widgets/Legend';
-import * as styles from './Legend.module.css';
-const LegendContainer = ({ legendContainer, mapView }) => {
+const LegendContainer = ({ legendContainer, mapView, displayLegend }) => {
+  const [legend, setLegend] = useState(null);
   useEffect(() => {
-    let legend = null;
-    if (legendContainer && mapView) {
-      const container = document.createElement('div');
-      legendContainer.appendChild(container);
-      legend = new Legend({
-        view: mapView,
-        container: container
-      });
+    if (legend) {
+      legend.visible = displayLegend;
     }
-    return () => {
-      if (legend) {
-        legend.destroy();
-      }
-    };
+  }, [legend, displayLegend]);
+  useEffect(() => {
+    if (legendContainer && mapView) {
+      legendContainer.innerHTML = '';
+      setLegend(
+        new Legend({
+          view: mapView,
+          container: legendContainer
+        })
+      );
+    }
   }, [legendContainer, mapView]);
 
   return null;

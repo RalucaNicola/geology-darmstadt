@@ -19,10 +19,11 @@ export const App = () => {
   const [slices, setSlices] = useState([]);
   const [dimensions, setDimensions] = useState([]);
   const [enableGrid, setEnableGrid] = useState(true);
+  const [displayLegend, setDisplayLegend] = useState(true);
   return (
     <>
       <Map>
-        <Legend legendContainer={legendContainer}></Legend>
+        <Legend legendContainer={legendContainer} displayLegend={displayLegend}></Legend>
         <VoxelLayer
           selectedVariable={selectedVariable}
           selectedVisualization={selectedVisualization}
@@ -57,6 +58,8 @@ export const App = () => {
               setLegendContainer={setLegendContainer}
               setEnableGrid={setEnableGrid}
               enableGrid={enableGrid}
+              displayLegend={displayLegend}
+              setDisplayLegend={setDisplayLegend}
             ></MeasurementsPanel>
           </div>
           <div className={styles.rightPane}>

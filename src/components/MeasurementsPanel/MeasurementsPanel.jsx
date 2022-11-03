@@ -18,7 +18,9 @@ const MeasurementsPanel = ({
   setSelectedVariable,
   setLegendContainer,
   setEnableGrid,
-  enableGrid
+  enableGrid,
+  displayLegend,
+  setDisplayLegend
 }) => {
   const legendContainerRef = useRef();
   useEffect(() => {
@@ -47,6 +49,16 @@ const MeasurementsPanel = ({
       </CalciteRadioButtonGroup>
 
       <div className={styles.variableInfo}>
+        <CalciteLabel
+          className={styles.label}
+          layout='inline-space-between'
+          onCalciteSwitchChange={(event) => {
+            setDisplayLegend(event.target.checked);
+          }}
+        >
+          Display legend
+          <CalciteSwitch scale='m' checked={displayLegend ? true : undefined}></CalciteSwitch>
+        </CalciteLabel>
         <div ref={legendContainerRef}></div>
       </div>
       <div className={styles.layerVisibility}>
