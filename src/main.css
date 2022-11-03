@@ -31,8 +31,7 @@ body {
   background: none !important;
 }
 
-.esri-widget__heading.esri-legend__service-label,
-.esri-legend__layer-caption {
+.esri-widget__heading.esri-legend__service-label {
   display: none !important;
 }
 
@@ -72,11 +71,11 @@ body {
 a {
   color: var(--calcite-ui-brand);
   text-decoration: none;
-  border-bottom: 2px solid var(--calcite-ui-brand);
+  border-bottom: 1px solid var(--calcite-ui-brand);
 }
 
 a:hover {
   cursor: pointer;
   color: var(--calcite-ui-brand-hover);
-  border-bottom: 2px solid var(--calcite-ui-brand-hover);
+  border-bottom: 1px solid var(--calcite-ui-brand-hover);
 }
