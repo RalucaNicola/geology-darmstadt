@@ -9,3 +9,7 @@
 .centerRadioButtons {
   justify-content: center;
 }
+
+.overviewMap img {
+  max-height: 150px;
+}

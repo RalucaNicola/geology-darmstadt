@@ -1,5 +1,5 @@
-@import "https://js.arcgis.com/4.23/@arcgis/core/assets/esri/themes/dark/main.css";
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap");
+@import 'https://js.arcgis.com/4.23/@arcgis/core/assets/esri/themes/dark/main.css';
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap');
 
 html,
 body,
@@ -12,18 +12,17 @@ body,
   color: white;
 }
 body {
-  background: radial-gradient(#0d5f7d, #111111);
+  background: radial-gradient(#a3a8aa, #111111);
 }
 
 .calcite-theme-dark,
 :root {
-  --calcite-ui-brand: rgb(0, 194, 194);
-  --calcite-ui-brand-hover: rgb(3, 148, 148);
+  --calcite-ui-brand: rgb(255, 255, 255);
+  --calcite-ui-brand-hover: rgb(175, 175, 175);
   --calcite-ui-border-2: rgba(255, 255, 255, 0.6);
   --border-radius: 10px;
   --box-shadow: 0 1px 4px rgb(0 0 0 / 80%);
   --padding: 25px;
-  --border-corners: 1px solid rgba(0 255 255 / 0.6);
   --mobile-font-size: 12px;
   --font-size: 14px;
 }
@@ -62,7 +61,7 @@ body {
 }
 
 .separator:before {
-  content: "";
+  content: '';
   width: 80%;
   margin: 10px auto;
   border-top: 1px solid rgba(255 255 255 / 0.5);

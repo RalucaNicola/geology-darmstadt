@@ -1,10 +1,10 @@
 .background {
-  background-color: rgba(0 0 0 / 0.4);
+  background-color: rgba(0 0 0 / 0.8);
   pointer-events: all;
   padding: 20px;
   margin: 20px;
   position: relative;
-  box-shadow: inset 0 0 10px rgb(0 255 255 / 40%);
+  box-shadow: 0 0 10px rgb(0 0 0 / 40%);
   font-size: var(--calcite-font-size--1);
   width: min(max(30vw, 200px), 300px);
   box-sizing: border-box;
@@ -13,50 +13,11 @@
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(6px);
-  filter: drop-shadow(2px 2px 6px rgba(0 255 255 / 0.8));
+  border-radius: 10px;
 }
 
 .scroll {
   padding: 10px;
   flex: 1 1 auto;
   overflow-y: auto;
-}
-
-.border {
-  content: '';
-  position: absolute;
-  height: 10px;
-  width: 10px;
-}
-
-.borderLeftTop {
-  composes: border;
-  top: 0;
-  left: 0;
-  border-left: var(--border-corners);
-  border-top: var(--border-corners);
-}
-
-.borderRightTop {
-  composes: border;
-  top: 0;
-  right: 0;
-  border-right: var(--border-corners);
-  border-top: var(--border-corners);
-}
-
-.borderRightBottom {
-  composes: border;
-  bottom: 0;
-  right: 0;
-  border-right: var(--border-corners);
-  border-bottom: var(--border-corners);
-}
-
-.borderLeftBottom {
-  composes: border;
-  bottom: 0;
-  left: 0;
-  border-left: var(--border-corners);
-  border-bottom: var(--border-corners);
 }
