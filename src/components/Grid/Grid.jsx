@@ -11,6 +11,7 @@ import ExtentAndRotationGeoreference from '@arcgis/core/layers/support/ExtentAnd
 // ETRS 1989 UTM Zone 32N
 const spatialReference = new SpatialReference({ wkid: 102328 });
 const alpha = 0.4;
+const offset = -70;
 
 const Grid = ({ mapView, enableGrid }) => {
   const [gridLayer, setGridLayer] = useState(null);
@@ -29,18 +30,18 @@ const Grid = ({ mapView, enableGrid }) => {
         source: new DimensionAnalysis({
           dimensions: [
             new LengthDimension({
-              startPoint: new Point({ x: xmin + 100, y: ymin, spatialReference }),
-              endPoint: new Point({ x: xmax, y: ymin, spatialReference })
+              startPoint: new Point({ x: xmin + 100, y: ymin, z: offset, spatialReference }),
+              endPoint: new Point({ x: xmax, y: ymin, z: offset, spatialReference })
             }),
             new LengthDimension({
-              startPoint: new Point({ x: xmin, y: ymin + 100, spatialReference }),
-              endPoint: new Point({ x: xmin, y: ymax, spatialReference })
+              startPoint: new Point({ x: xmin, y: ymin + 100, z: offset, spatialReference }),
+              endPoint: new Point({ x: xmin, y: ymax, z: offset, spatialReference })
             })
           ]
         }),
         style: new DimensionSimpleStyle({
           color: [185, 185, 185, 1],
-          lineSize: 1.5,
+          lineSize: 1,
           textBackgroundColor: [0, 0, 0, 0],
           textColor: [255, 255, 255, 1],
           fontSize: 8
