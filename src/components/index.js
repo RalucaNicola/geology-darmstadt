@@ -7,3 +7,4 @@ export { default as Legend } from './Legend/Legend';
 export { default as Scale } from './Scale/Scale';
 export { default as Grid } from './Grid/Grid';
 export { default as VoxelLayer } from './VoxelLayer/VoxelLayer';
+export { default as Fault } from './Fault/Fault';

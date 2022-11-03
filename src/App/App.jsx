@@ -1,5 +1,15 @@
 import { useState } from 'react';
-import { Map, Title, MeasurementsPanel, VisualizationPanel, Legend, VoxelLayer, Scale, Grid } from '../components';
+import {
+  Map,
+  Title,
+  MeasurementsPanel,
+  VisualizationPanel,
+  Legend,
+  VoxelLayer,
+  Scale,
+  Grid,
+  Fault
+} from '../components';
 import { variables } from '../config';
 import * as styles from './App.module.css';
 
@@ -19,7 +29,8 @@ export const App = () => {
   const [slices, setSlices] = useState([]);
   const [dimensions, setDimensions] = useState([]);
   const [enableGrid, setEnableGrid] = useState(true);
-  const [displayLegend, setDisplayLegend] = useState(true);
+  const [displayLegend, setDisplayLegend] = useState(false);
+  const [displayFault, setDisplayFault] = useState(true);
   return (
     <>
       <Map>
@@ -43,6 +54,7 @@ export const App = () => {
           dimensions={dimensions}
           setDimensions={setDimensions}
         ></VoxelLayer>
+        <Fault displayFault={displayFault}></Fault>
         <Scale exaggeration={exaggeration}></Scale>
         <Grid enableGrid={enableGrid}></Grid>
       </Map>
@@ -60,6 +72,8 @@ export const App = () => {
               enableGrid={enableGrid}
               displayLegend={displayLegend}
               setDisplayLegend={setDisplayLegend}
+              displayFault={displayFault}
+              setDisplayFault={setDisplayFault}
             ></MeasurementsPanel>
           </div>
           <div className={styles.rightPane}>

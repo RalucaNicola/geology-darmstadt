@@ -20,7 +20,9 @@ const MeasurementsPanel = ({
   setEnableGrid,
   enableGrid,
   displayLegend,
-  setDisplayLegend
+  setDisplayLegend,
+  displayFault,
+  setDisplayFault
 }) => {
   const legendContainerRef = useRef();
   useEffect(() => {
@@ -71,6 +73,18 @@ const MeasurementsPanel = ({
         >
           Display grid
           <CalciteSwitch scale='m' checked={enableGrid ? true : undefined}></CalciteSwitch>
+        </CalciteLabel>
+      </div>
+      <div className={styles.layerVisibility}>
+        <CalciteLabel
+          className={styles.label}
+          layout='inline-space-between'
+          onCalciteSwitchChange={(event) => {
+            setDisplayFault(event.target.checked);
+          }}
+        >
+          Display fault
+          <CalciteSwitch scale='m' checked={displayFault ? true : undefined}></CalciteSwitch>
         </CalciteLabel>
       </div>
       <div className={styles.overviewMap}>
