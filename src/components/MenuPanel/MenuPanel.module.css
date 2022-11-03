@@ -1,0 +1,23 @@
+.label {
+  cursor: pointer;
+}
+
+.variableInfo {
+  padding: 0;
+}
+
+.centerRadioButtons {
+  justify-content: center;
+}
+
+.overviewMap {
+  display: flex;
+  gap: 10px;
+  font-size: var(--calcite-font-size--2);
+  line-height: 1.1rem;
+  font-style: italic;
+}
+
+.overviewMap img {
+  max-height: 100px;
+}

@@ -1,12 +1,14 @@
 h1 {
   font-size: var(--calcite-font-size-1);
   padding: 10px 0;
+  text-align: center;
 }
 
 h2 {
   font-size: var(--calcite-font-size--1);
-  padding: 5px 0;
+  padding: 15px 0 10px 0;
   margin: 0 0 5px 0;
+  text-align: left;
 }
 
 h1,
@@ -16,7 +18,6 @@ h2 {
 
 .titleBackground {
   color: white;
-  text-align: center;
   letter-spacing: 1.3px;
   text-transform: uppercase;
 }

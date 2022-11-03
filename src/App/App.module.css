@@ -19,12 +19,34 @@
 .appFooter {
   flex: 0 0 auto;
   font-size: var(--calcite-font-size--2);
-  padding: 10px;
-  background-color: rgba(0 0 0 / 0.3);
+  padding: 0 10px;
   pointer-events: all;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
+}
+
+.esriLogo {
+  height: 30px;
+  overflow: hidden;
+}
+
+.esriLogo a {
+  border-bottom: none;
+}
+.esriLogo a:hover {
+  border-bottom: none;
+}
+
+.esriLogo:hover img {
+  border-bottom: none;
+  height: 30px;
+}
+
+.esriLogo img {
+  height: 25px;
+  transition: height 300ms;
 }
 
 .appContent {

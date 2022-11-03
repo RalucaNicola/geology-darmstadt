@@ -1,7 +1,7 @@
 export { default as Map } from './Map/Map';
 export { default as Title } from './Title/Title';
 export { default as Background } from './Background/Background';
-export { default as MeasurementsPanel } from './MeasurementsPanel/MeasurementsPanel';
+export { default as MenuPanel } from './MenuPanel/MenuPanel';
 export { default as VisualizationPanel } from './VisualizationPanel/VisualizationPanel';
 export { default as Legend } from './Legend/Legend';
 export { default as Scale } from './Scale/Scale';

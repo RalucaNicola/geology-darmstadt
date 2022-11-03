@@ -1,4 +1,4 @@
-import { Background } from '../index';
+import { Background, Title } from '../index';
 import * as styles from './VisualizationPanel.module.css';
 import '@esri/calcite-components/dist/components/calcite-slider';
 import '@esri/calcite-components/dist/components/calcite-switch';
@@ -12,6 +12,7 @@ import {
   CalciteSlider,
   CalciteSwitch
 } from '@esri/calcite-components-react';
+import { variables } from '../../config';
 import { useEffect, useState } from 'react';
 import VoxelSlice from '@arcgis/core/layers/voxel/VoxelSlice';
 
@@ -35,6 +36,7 @@ const getSlice = (orientation, value) => {
 
 const VisualizationPanel = ({
   selectedVariable,
+  setSelectedVariable,
   selectedVisualization,
   setSelectedVisualization,
   exaggeration,
@@ -92,6 +94,27 @@ const VisualizationPanel = ({
 
   return (
     <Background title='Visualization' size='small'>
+      <Title text='Variables'></Title>
+      <CalciteRadioButtonGroup
+        name='pressure-group'
+        layout='vertical'
+        scale='s'
+        onCalciteRadioButtonChange={(event) => {
+          const variable = variables.filter((v) => v.name === event.target.value)[0];
+          setSelectedVariable(variable);
+        }}
+      >
+        {variables.map((variable, index) => {
+          const checked = selectedVariable.name === variable.name ? { checked: true } : undefined;
+          return (
+            <CalciteLabel key={index} layout='inline' className={styles.label}>
+              <CalciteRadioButton value={variable.name} {...checked} scale='s'></CalciteRadioButton>
+              {variable.name}
+            </CalciteLabel>
+          );
+        })}
+      </CalciteRadioButtonGroup>
+      <Title text='Rendering'></Title>
       <CalciteRadioButtonGroup
         name='visualization-group'
         layout='vertical'
@@ -202,7 +225,7 @@ const VisualizationPanel = ({
       ) : (
         ''
       )}
-      {/* <div className="separator"></div> */}
+      <div className='separator'></div>
       <div>
         <CalciteLabel
           className={styles.label}
@@ -260,21 +283,23 @@ const VisualizationPanel = ({
           ''
         )}
       </div>
-      {/* <div className="separator"></div> */}
+      <div className='separator'></div>
       <CalciteLabel className={styles.label}>Vertical exaggeration</CalciteLabel>
-      <CalciteSlider
-        labelHandles
-        min='1'
-        max='20'
-        scale='m'
-        value={exaggeration}
-        snap
-        step='1'
-        onCalciteSliderInput={(event) => {
-          const value = event.target.value ? event.target.value : 1;
-          setExaggeration(value);
-        }}
-      ></CalciteSlider>
+      <div className={styles.slices}>
+        <CalciteSlider
+          labelHandles
+          min='1'
+          max='20'
+          scale='m'
+          value={exaggeration}
+          snap
+          step='1'
+          onCalciteSliderInput={(event) => {
+            const value = event.target.value ? event.target.value : 1;
+            setExaggeration(value);
+          }}
+        ></CalciteSlider>
+      </div>
     </Background>
   );
 };

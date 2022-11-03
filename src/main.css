@@ -51,20 +51,20 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0 194 194 / 0.1);
+  background: rgba(238 143 31 / 0.1);
   border: none;
   border-radius: var(--border-radius);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0 194 194 / 0.8);
+  background: rgba(238 143 31 / 0.8);
 }
 
 .separator:before {
   content: '';
-  width: 80%;
+  width: 50%;
   margin: 10px auto;
-  border-top: 1px solid rgba(255 255 255 / 0.5);
+  border-top: 1px solid rgba(255 255 255 / 0.3);
   display: block;
   padding: 0 0 10px 0;
 }

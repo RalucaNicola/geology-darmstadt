@@ -1,15 +1,5 @@
 import { useState } from 'react';
-import {
-  Map,
-  Title,
-  MeasurementsPanel,
-  VisualizationPanel,
-  Legend,
-  VoxelLayer,
-  Scale,
-  Grid,
-  Fault
-} from '../components';
+import { Map, Title, MenuPanel, VisualizationPanel, Legend, VoxelLayer, Scale, Grid, Fault } from '../components';
 import { variables } from '../config';
 import * as styles from './App.module.css';
 
@@ -64,7 +54,7 @@ export const App = () => {
         </header>
         <div className={styles.appContent}>
           <div className={styles.leftPane}>
-            <MeasurementsPanel
+            <MenuPanel
               selectedVariable={selectedVariable}
               setSelectedVariable={setSelectedVariable}
               setLegendContainer={setLegendContainer}
@@ -74,11 +64,12 @@ export const App = () => {
               setDisplayLegend={setDisplayLegend}
               displayFault={displayFault}
               setDisplayFault={setDisplayFault}
-            ></MeasurementsPanel>
+            ></MenuPanel>
           </div>
           <div className={styles.rightPane}>
             <VisualizationPanel
               selectedVariable={selectedVariable}
+              setSelectedVariable={setSelectedVariable}
               selectedVisualization={selectedVisualization}
               setSelectedVisualization={setSelectedVisualization}
               exaggeration={exaggeration}
@@ -112,10 +103,9 @@ export const App = () => {
             </a>
             .
           </p>
-          <p>
-            Powered by{' '}
+          <p className={styles.esriLogo}>
             <a href='https://www.esri.com/en-us/home' target='_blank'>
-              Esri
+              <img src='./assets/esri_science_of_where_white.png'></img>
             </a>
           </p>
         </footer>
