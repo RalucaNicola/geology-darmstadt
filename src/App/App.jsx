@@ -1,11 +1,11 @@
-import {useState} from "react";
-import {Map, Title, MeasurementsPanel, VisualizationPanel, Legend, VoxelLayer, Scale} from "../components";
-import {variables} from "../config";
-import * as styles from "./App.module.css";
+import { useState } from 'react';
+import { Map, Title, MeasurementsPanel, VisualizationPanel, Legend, VoxelLayer, Scale, Grid } from '../components';
+import { variables } from '../config';
+import * as styles from './App.module.css';
 
 export const App = () => {
   const [selectedVariable, setSelectedVariable] = useState(variables[0]);
-  const [selectedVisualization, setSelectedVisualization] = useState("volume");
+  const [selectedVisualization, setSelectedVisualization] = useState('volume');
 
   const [exaggeration, setExaggeration] = useState(15);
   const [legendContainer, setLegendContainer] = useState(null);
@@ -18,6 +18,7 @@ export const App = () => {
   const [displaySlices, setDisplaySlices] = useState(false);
   const [slices, setSlices] = useState([]);
   const [dimensions, setDimensions] = useState([]);
+  const [enableGrid, setEnableGrid] = useState(true);
   return (
     <>
       <Map>
@@ -42,10 +43,11 @@ export const App = () => {
           setDimensions={setDimensions}
         ></VoxelLayer>
         <Scale exaggeration={exaggeration}></Scale>
+        <Grid enableGrid={enableGrid}></Grid>
       </Map>
       <div className={styles.appLayout}>
         <header className={styles.appTitle}>
-          <Title text="Geological model Darmstadt" size="large"></Title>
+          <Title text='Geological model Darmstadt' size='large'></Title>
         </header>
         <div className={styles.appContent}>
           <div className={styles.leftPane}>
@@ -53,6 +55,8 @@ export const App = () => {
               selectedVariable={selectedVariable}
               setSelectedVariable={setSelectedVariable}
               setLegendContainer={setLegendContainer}
+              setEnableGrid={setEnableGrid}
+              enableGrid={enableGrid}
             ></MeasurementsPanel>
           </div>
           <div className={styles.rightPane}>
@@ -81,19 +85,19 @@ export const App = () => {
         </div>
         <footer className={styles.appFooter}>
           <p>
-            Dataset from{" "}
-            <a href="https://www.hlnug.de/service/english" target="_blank">
+            Dataset from{' '}
+            <a href='https://www.hlnug.de/service/english' target='_blank'>
               Hessian Agency for Nature Conservation, Environment and Geology
-            </a>{" "}
-            and{" "}
-            <a href="https://www.tu-darmstadt.de/" target="_blank">
+            </a>{' '}
+            and{' '}
+            <a href='https://www.tu-darmstadt.de/' target='_blank'>
               Technical University of Darmstadt
             </a>
             .
           </p>
           <p>
-            Powered by{" "}
-            <a href="https://www.esri.com/en-us/home" target="_blank">
+            Powered by{' '}
+            <a href='https://www.esri.com/en-us/home' target='_blank'>
               Esri
             </a>
           </p>

@@ -1,8 +1,9 @@
-export {default as Map} from "./Map/Map";
-export {default as Title} from "./Title/Title";
-export {default as Background} from "./Background/Background";
-export {default as MeasurementsPanel} from "./MeasurementsPanel/MeasurementsPanel";
-export {default as VisualizationPanel} from "./VisualizationPanel/VisualizationPanel";
-export {default as Legend} from "./Legend/Legend";
-export {default as Scale} from "./Scale/Scale";
-export {default as VoxelLayer} from "./VoxelLayer/VoxelLayer";
+export { default as Map } from './Map/Map';
+export { default as Title } from './Title/Title';
+export { default as Background } from './Background/Background';
+export { default as MeasurementsPanel } from './MeasurementsPanel/MeasurementsPanel';
+export { default as VisualizationPanel } from './VisualizationPanel/VisualizationPanel';
+export { default as Legend } from './Legend/Legend';
+export { default as Scale } from './Scale/Scale';
+export { default as Grid } from './Grid/Grid';
+export { default as VoxelLayer } from './VoxelLayer/VoxelLayer';
