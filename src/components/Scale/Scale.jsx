@@ -127,8 +127,8 @@ const getBoundingBox = (xmin, xmax, ymin, ymax, zmin, zmax) => {
       symbolLayers: [
         {
           type: 'line',
-          material: { color: [200, 200, 200] },
-          size: 0.5,
+          material: { color: [200, 200, 200, 0.8] },
+          size: 0.75,
           pattern: {
             type: 'style',
             style: 'dash'
