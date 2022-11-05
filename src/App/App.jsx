@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Map, Title, MenuPanel, VisualizationPanel, Legend, VoxelLayer, Scale, Grid, Fault } from '../components';
+import { Map, Title, MenuPanel, VisualizationPanel, VoxelLayer, Scale, Grid, Fault } from '../components';
 import { variables } from '../config';
 import * as styles from './App.module.css';
 
 export const App = () => {
   const [selectedVariable, setSelectedVariable] = useState(variables[0]);
   const [selectedVisualization, setSelectedVisualization] = useState('volume');
-
   const [exaggeration, setExaggeration] = useState(15);
-  const [legendContainer, setLegendContainer] = useState(null);
+  const [variableStyle, setVariableStyle] = useState(null);
   const [sections, setSections] = useState([]);
   const [continuousVariable, setContinuousVariable] = useState(null);
   const [isosurfaceInfo, setIsosurfaceInfo] = useState(null);
@@ -19,12 +18,11 @@ export const App = () => {
   const [slices, setSlices] = useState([]);
   const [dimensions, setDimensions] = useState([]);
   const [enableGrid, setEnableGrid] = useState(true);
-  const [displayLegend, setDisplayLegend] = useState(false);
+  const [displayLegend, setDisplayLegend] = useState(true);
   const [displayFault, setDisplayFault] = useState(true);
   return (
     <>
       <Map>
-        <Legend legendContainer={legendContainer} displayLegend={displayLegend}></Legend>
         <VoxelLayer
           selectedVariable={selectedVariable}
           selectedVisualization={selectedVisualization}
@@ -43,6 +41,8 @@ export const App = () => {
           slices={slices}
           dimensions={dimensions}
           setDimensions={setDimensions}
+          variableStyle={variableStyle}
+          setVariableStyle={setVariableStyle}
         ></VoxelLayer>
         <Fault displayFault={displayFault}></Fault>
         <Scale exaggeration={exaggeration}></Scale>
@@ -55,9 +55,7 @@ export const App = () => {
         <div className={styles.appContent}>
           <div className={styles.leftPane}>
             <MenuPanel
-              selectedVariable={selectedVariable}
-              setSelectedVariable={setSelectedVariable}
-              setLegendContainer={setLegendContainer}
+              variableStyle={variableStyle}
               setEnableGrid={setEnableGrid}
               enableGrid={enableGrid}
               displayLegend={displayLegend}

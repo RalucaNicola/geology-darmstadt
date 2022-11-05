@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import * as reactiveUtils from "@arcgis/core/core/reactiveUtils";
+import { useEffect, useState } from 'react';
+import * as reactiveUtils from '@arcgis/core/core/reactiveUtils';
 
 const VoxelLayer = ({
   selectedVariable,
@@ -19,6 +19,8 @@ const VoxelLayer = ({
   slices,
   dimensions,
   setDimensions,
+  variableStyle,
+  setVariableStyle
 }) => {
   const [layer, setLayer] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -44,7 +46,7 @@ const VoxelLayer = ({
   useEffect(() => {
     if (layer) {
       const variable = layer.getVariable(selectedVariable.id);
-      const continuousVariable = variable.renderingFormat.continuity === "discrete" ? false : true;
+      const continuousVariable = variable.renderingFormat.continuity === 'discrete' ? false : true;
       setContinuousVariable(continuousVariable);
     }
   }, [layer, selectedVariable]);
@@ -52,13 +54,14 @@ const VoxelLayer = ({
   useEffect(() => {
     if (loaded) {
       const style = layer.getVariableStyle(selectedVariable.id);
+      setVariableStyle(style);
       if (style && style.transferFunction) {
         const range = style.transferFunction.stretchRange;
         const min = Math.min(Math.round(range[0]), Math.round(range[1]));
         const max = Math.max(Math.round(range[0]), Math.round(range[1]));
         setIsosurfaceInfo({
           min,
-          max,
+          max
         });
         setIsosurfaceValue(Math.floor((min + max) / 2));
       }
@@ -66,7 +69,13 @@ const VoxelLayer = ({
   }, [loaded, layer, selectedVariable]);
 
   useEffect(() => {
-    if (loaded && layer && selectedVisualization === "surfaces" && continuousVariable && isosurfaceValue) {
+    if (layer && variableStyle) {
+      layer.variableStyles[variableStyle.variableId] = variableStyle;
+    }
+  }, [layer, variableStyle]);
+
+  useEffect(() => {
+    if (loaded && layer && selectedVisualization === 'surfaces' && continuousVariable && isosurfaceValue) {
       const style = layer.getVariableStyle(selectedVariable.id);
       const color = layer.getColorForContinuousDataValue(selectedVariable.id, isosurfaceValue, false);
       if (style) {
@@ -74,9 +83,9 @@ const VoxelLayer = ({
           {
             value: isosurfaceValue,
             enabled: true,
-            color: {...color, a: 0.7},
-            colorLocked: false,
-          },
+            color: { ...color, a: 0.7 },
+            colorLocked: false
+          }
         ];
       }
     }
@@ -116,10 +125,10 @@ const VoxelLayer = ({
     if (loaded && dimensions && dimensions.length > 0) {
       const sections = [];
       for (let i = 1; i < dimensions[1]; i++) {
-        sections.push({enabled: false, label: `we${i}`, orientation: 180, tilt: 90, point: [0, i, 0]});
+        sections.push({ enabled: false, label: `we${i}`, orientation: 180, tilt: 90, point: [0, i, 0] });
       }
       for (let i = 1; i < dimensions[0]; i++) {
-        sections.push({enabled: false, label: `ns${i}`, orientation: 90, tilt: 90, point: [i, 0, 0]});
+        sections.push({ enabled: false, label: `ns${i}`, orientation: 90, tilt: 90, point: [i, 0, 0] });
       }
       setSections(sections);
     }
