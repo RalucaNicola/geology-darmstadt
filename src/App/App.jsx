@@ -7,7 +7,7 @@ export const App = () => {
   const [selectedVariable, setSelectedVariable] = useState(variables[0]);
   const [selectedVisualization, setSelectedVisualization] = useState('volume');
   const [exaggeration, setExaggeration] = useState(15);
-  const [variableStyle, setVariableStyle] = useState(null);
+  const [legendInfo, setLegendInfo] = useState(null);
   const [sections, setSections] = useState([]);
   const [continuousVariable, setContinuousVariable] = useState(null);
   const [isosurfaceInfo, setIsosurfaceInfo] = useState(null);
@@ -41,8 +41,8 @@ export const App = () => {
           slices={slices}
           dimensions={dimensions}
           setDimensions={setDimensions}
-          variableStyle={variableStyle}
-          setVariableStyle={setVariableStyle}
+          legendInfo={legendInfo}
+          setLegendInfo={setLegendInfo}
         ></VoxelLayer>
         <Fault displayFault={displayFault}></Fault>
         <Scale exaggeration={exaggeration}></Scale>
@@ -55,7 +55,8 @@ export const App = () => {
         <div className={styles.appContent}>
           <div className={styles.leftPane}>
             <MenuPanel
-              variableStyle={variableStyle}
+              legendInfo={legendInfo}
+              setLegendInfo={setLegendInfo}
               setEnableGrid={setEnableGrid}
               enableGrid={enableGrid}
               displayLegend={displayLegend}

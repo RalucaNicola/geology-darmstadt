@@ -19,8 +19,8 @@ const VoxelLayer = ({
   slices,
   dimensions,
   setDimensions,
-  variableStyle,
-  setVariableStyle
+  legendInfo,
+  setLegendInfo
 }) => {
   const [layer, setLayer] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -52,9 +52,38 @@ const VoxelLayer = ({
   }, [layer, selectedVariable]);
 
   useEffect(() => {
+    if (layer) {
+      const style = layer.getVariableStyle(selectedVariable.id);
+      const legendInfo = {
+        id: selectedVariable.id,
+        label: style.label
+      };
+      if (style.transferFunction) {
+        legendInfo.continuous = true;
+        legendInfo.range = style.transferFunction.stretchRange;
+        legendInfo.colorStops = style.transferFunction.colorStops;
+      }
+      if (style.uniqueValues && style.uniqueValues.length > 0) {
+        legendInfo.continuous = false;
+        console.log(style.uniqueValues);
+        legendInfo.uniqueValues = style.uniqueValues.filter((uv) => {
+          if (uv.label !== '<all other values>') {
+            return {
+              label: uv.label,
+              value: uv.value,
+              color: uv.color,
+              enabled: uv.enabled
+            };
+          }
+        });
+      }
+      setLegendInfo(legendInfo);
+    }
+  }, [layer, selectedVariable]);
+
+  useEffect(() => {
     if (loaded) {
       const style = layer.getVariableStyle(selectedVariable.id);
-      setVariableStyle(style);
       if (style && style.transferFunction) {
         const range = style.transferFunction.stretchRange;
         const min = Math.min(Math.round(range[0]), Math.round(range[1]));
@@ -69,10 +98,19 @@ const VoxelLayer = ({
   }, [loaded, layer, selectedVariable]);
 
   useEffect(() => {
-    if (layer && variableStyle) {
-      layer.variableStyles[variableStyle.variableId] = variableStyle;
+    if (layer && legendInfo) {
+      if (!legendInfo.continuous) {
+        layer.getVariableStyle(legendInfo.id).uniqueValues = legendInfo.uniqueValues.map((uv) => {
+          return {
+            color: uv.color,
+            value: uv.value,
+            enabled: uv.enabled,
+            label: uv.label
+          };
+        });
+      }
     }
-  }, [layer, variableStyle]);
+  }, [layer, legendInfo]);
 
   useEffect(() => {
     if (loaded && layer && selectedVisualization === 'surfaces' && continuousVariable && isosurfaceValue) {

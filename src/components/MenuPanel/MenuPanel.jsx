@@ -5,7 +5,8 @@ import '@esri/calcite-components/dist/components/calcite-switch';
 import { CalciteLabel, CalciteSwitch } from '@esri/calcite-components-react';
 
 const Menu = ({
-  variableStyle,
+  legendInfo,
+  setLegendInfo,
   setEnableGrid,
   enableGrid,
   displayLegend,
@@ -26,7 +27,7 @@ const Menu = ({
           Display legend
           <CalciteSwitch scale='m' checked={displayLegend ? true : undefined}></CalciteSwitch>
         </CalciteLabel>
-        {displayLegend ? <Legend variableStyle={variableStyle}></Legend> : <></>}
+        {displayLegend ? <Legend legendInfo={legendInfo} setLegendInfo={setLegendInfo}></Legend> : <></>}
       </div>
       <div className={styles.layerVisibility}>
         <CalciteLabel
