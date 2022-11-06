@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import * as reactiveUtils from "@arcgis/core/core/reactiveUtils";
+import { useEffect, useState } from 'react';
+import * as reactiveUtils from '@arcgis/core/core/reactiveUtils';
 
 const VoxelLayer = ({
   selectedVariable,
@@ -19,6 +19,8 @@ const VoxelLayer = ({
   slices,
   dimensions,
   setDimensions,
+  legendInfo,
+  setLegendInfo
 }) => {
   const [layer, setLayer] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -44,8 +46,38 @@ const VoxelLayer = ({
   useEffect(() => {
     if (layer) {
       const variable = layer.getVariable(selectedVariable.id);
-      const continuousVariable = variable.renderingFormat.continuity === "discrete" ? false : true;
+      const continuousVariable = variable.renderingFormat.continuity === 'discrete' ? false : true;
       setContinuousVariable(continuousVariable);
+    }
+  }, [layer, selectedVariable]);
+
+  useEffect(() => {
+    if (layer) {
+      const style = layer.getVariableStyle(selectedVariable.id);
+      const legendInfo = {
+        id: selectedVariable.id,
+        label: style.label
+      };
+      if (style.transferFunction) {
+        legendInfo.continuous = true;
+        legendInfo.range = style.transferFunction.stretchRange;
+        legendInfo.colorStops = style.transferFunction.colorStops;
+      }
+      if (style.uniqueValues && style.uniqueValues.length > 0) {
+        legendInfo.continuous = false;
+        console.log(style.uniqueValues);
+        legendInfo.uniqueValues = style.uniqueValues.filter((uv) => {
+          if (uv.label !== '<all other values>') {
+            return {
+              label: uv.label,
+              value: uv.value,
+              color: uv.color,
+              enabled: uv.enabled
+            };
+          }
+        });
+      }
+      setLegendInfo(legendInfo);
     }
   }, [layer, selectedVariable]);
 
@@ -58,7 +90,7 @@ const VoxelLayer = ({
         const max = Math.max(Math.round(range[0]), Math.round(range[1]));
         setIsosurfaceInfo({
           min,
-          max,
+          max
         });
         setIsosurfaceValue(Math.floor((min + max) / 2));
       }
@@ -66,7 +98,22 @@ const VoxelLayer = ({
   }, [loaded, layer, selectedVariable]);
 
   useEffect(() => {
-    if (loaded && layer && selectedVisualization === "surfaces" && continuousVariable && isosurfaceValue) {
+    if (layer && legendInfo) {
+      if (!legendInfo.continuous) {
+        layer.getVariableStyle(legendInfo.id).uniqueValues = legendInfo.uniqueValues.map((uv) => {
+          return {
+            color: uv.color,
+            value: uv.value,
+            enabled: uv.enabled,
+            label: uv.label
+          };
+        });
+      }
+    }
+  }, [layer, legendInfo]);
+
+  useEffect(() => {
+    if (loaded && layer && selectedVisualization === 'surfaces' && continuousVariable && isosurfaceValue) {
       const style = layer.getVariableStyle(selectedVariable.id);
       const color = layer.getColorForContinuousDataValue(selectedVariable.id, isosurfaceValue, false);
       if (style) {
@@ -74,9 +121,9 @@ const VoxelLayer = ({
           {
             value: isosurfaceValue,
             enabled: true,
-            color: {...color, a: 0.7},
-            colorLocked: false,
-          },
+            color: { ...color, a: 0.7 },
+            colorLocked: false
+          }
         ];
       }
     }
@@ -116,10 +163,10 @@ const VoxelLayer = ({
     if (loaded && dimensions && dimensions.length > 0) {
       const sections = [];
       for (let i = 1; i < dimensions[1]; i++) {
-        sections.push({enabled: false, label: `we${i}`, orientation: 180, tilt: 90, point: [0, i, 0]});
+        sections.push({ enabled: false, label: `we${i}`, orientation: 180, tilt: 90, point: [0, i, 0] });
       }
       for (let i = 1; i < dimensions[0]; i++) {
-        sections.push({enabled: false, label: `ns${i}`, orientation: 90, tilt: 90, point: [i, 0, 0]});
+        sections.push({ enabled: false, label: `ns${i}`, orientation: 90, tilt: 90, point: [i, 0, 0] });
       }
       setSections(sections);
     }

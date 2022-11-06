@@ -1,13 +1,12 @@
-import { Background } from '../index';
+import { Background, Legend } from '../index';
 import * as styles from './MenuPanel.module.css';
 import '@esri/calcite-components/dist/components/calcite-label';
 import '@esri/calcite-components/dist/components/calcite-switch';
 import { CalciteLabel, CalciteSwitch } from '@esri/calcite-components-react';
 
-import { useEffect, useRef } from 'react';
-
 const Menu = ({
-  setLegendContainer,
+  legendInfo,
+  setLegendInfo,
   setEnableGrid,
   enableGrid,
   displayLegend,
@@ -15,10 +14,6 @@ const Menu = ({
   displayFault,
   setDisplayFault
 }) => {
-  const legendContainerRef = useRef();
-  useEffect(() => {
-    setLegendContainer(legendContainerRef.current);
-  }, [legendContainerRef]);
   return (
     <Background title='' size='small'>
       <div className={styles.variableInfo}>
@@ -32,7 +27,7 @@ const Menu = ({
           Display legend
           <CalciteSwitch scale='m' checked={displayLegend ? true : undefined}></CalciteSwitch>
         </CalciteLabel>
-        <div ref={legendContainerRef}></div>
+        {displayLegend ? <Legend legendInfo={legendInfo} setLegendInfo={setLegendInfo}></Legend> : <></>}
       </div>
       <div className={styles.layerVisibility}>
         <CalciteLabel

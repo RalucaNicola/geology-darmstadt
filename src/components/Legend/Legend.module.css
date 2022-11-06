@@ -1,0 +1,33 @@
+.container {
+  margin-bottom: 20px;
+}
+
+.legendTitle {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 5px;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.gradientContainer {
+  padding-top: 10px;
+  margin: 5px 20px 20px;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+
+.chip {
+  border-radius: 5px;
+  border: none;
+  color: white;
+  text-shadow: 0 0 1.5px black;
+  margin: 5px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: background-color 200ms;
+}
