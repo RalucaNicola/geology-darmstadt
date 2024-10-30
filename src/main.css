@@ -1,4 +1,4 @@
-@import 'https://js.arcgis.com/4.23/@arcgis/core/assets/esri/themes/dark/main.css';
+@import 'https://js.arcgis.com/4.30/@arcgis/core/assets/esri/themes/dark/main.css';
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap');
 
 html,
@@ -15,11 +15,11 @@ body {
   background: radial-gradient(#a3a8aa, #111111);
 }
 
-.calcite-theme-dark,
+.calcite-mode-dark,
 :root {
-  --calcite-ui-brand: rgb(255, 255, 255);
-  --calcite-ui-brand-hover: rgb(175, 175, 175);
-  --calcite-ui-border-2: rgba(255, 255, 255, 0.6);
+  --calcite-color-brand: rgb(255, 255, 255, 0.4);
+  --calcite-color-brand-hover: rgb(175, 175, 175);
+  --calcite-color-border-2: rgba(255, 255, 255, 0.6);
   --border-radius: 10px;
   --box-shadow: 0 1px 4px rgb(0 0 0 / 80%);
   --padding: 25px;
